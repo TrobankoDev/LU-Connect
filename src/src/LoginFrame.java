@@ -32,5 +32,28 @@ public class LoginFrame extends JFrame {
 
         add(panel);
 
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText().trim();
+                String password = new String(passwordField.getPassword());
+                String hashedPassword = EncryptionUtils.sha256(password);
+                if(DatabaseManager.verifyUser(username, hashedPassword)) {
+                    JOptionPane.showMessageDialog(null, "Logged in successfuly, welcome!");
+                    dispose();
+                    // Show chat frame
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid credentials.");
+
+                }
+            }
+        });
+
+        // Add signup frame button
+
+
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
     }
 }
