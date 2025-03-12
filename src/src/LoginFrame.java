@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 public class LoginFrame extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
-    private JButton loginButton, signupButton;
+    private JButton loginButton, signUpButton;
 
     public LoginFrame() {
         setTitle("LU-Connect Login");
-        setSize(600, 400);
+        setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -27,8 +27,8 @@ public class LoginFrame extends JFrame {
         loginButton = new JButton("Login");
         panel.add(loginButton);
 
-        signupButton = new JButton("Signup");
-        panel.add(signupButton);
+        signUpButton = new JButton("Signup");
+        panel.add(signUpButton);
 
         add(panel);
 
@@ -40,7 +40,7 @@ public class LoginFrame extends JFrame {
                 if(DatabaseManager.verifyUser(username, hashedPassword)) {
                     JOptionPane.showMessageDialog(null, "Logged in successfuly, welcome!");
                     dispose();
-                    // Show chat frame
+                    new ChatFrame(username).setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid credentials.");
 
@@ -48,9 +48,11 @@ public class LoginFrame extends JFrame {
             }
         });
 
-        // Add signup frame button
-
-
+        signUpButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                new SignUpFrame().setVisible(true);
+            }
+        });
     }
 
     public static void main(String[] args) {

@@ -63,7 +63,7 @@ public class LUConnectServer {
                 String firstLine = in.readLine();
                 if (firstLine != null && firstLine.startsWith("USER:")) {
                     // get the username from initial message
-                    username = firstLine.substring(5);
+                    username = firstLine.substring(5).trim();
                     // place the username and its corresponding clientHandler in hashmap
                     clients.put(username, this);
                     System.out.println("Client " + username + " connected");
